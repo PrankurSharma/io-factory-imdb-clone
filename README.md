@@ -11,7 +11,7 @@ Please note that the website has basic styling as the focus of this question was
 1. Install this folder on your system.
 
 2. Go to the client folder using command line and type the command: 
-        npm install
+        "npm install"
    to install all the required dependencies.
 
 3. Go to server folder using command line and type the same command.
@@ -19,7 +19,7 @@ Please note that the website has basic styling as the focus of this question was
 4. Change the information about your database in the server folder(index.js file) with the credentials of the mysql connection you are using.
 
 5. In two seperate command line terminals, type the command: 
-        npm start
+        "npm start"
 
 This will run the project in development mode.
 
