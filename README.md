@@ -8,15 +8,17 @@ Please note that the website has basic styling as the focus of this question was
 
 ==> In order to run the project on the system:
 
-1. Go to the client folder and type the command: 
+1. Install this folder on your system.
+
+2. Go to the client folder using command line and type the command: 
         npm install
    to install all the required dependencies.
 
-2. Go to server folder and type the same command.
+3. Go to server folder using command line and type the same command.
 
-3. Change the information about your database in the server folder(index.js file) with the credentials of the mysql connection you are using.
+4. Change the information about your database in the server folder(index.js file) with the credentials of the mysql connection you are using.
 
-4. In two seperate command line terminals, type the command: 
+5. In two seperate command line terminals, type the command: 
         npm start
 
 This will run the project in development mode.
