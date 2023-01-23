@@ -8,10 +8,10 @@ const mysql = require('mysql');
 var port = process.env.PORT || 3001;
 
 const db = mysql.createPool({
-	host: 'localhost',
-	user: 'root',
-	password: 'prankursharma',
-	database: 'imdbclone',
+    host: 'localhost',
+    user: 'root',
+    password: 'prankursharma',
+    database: 'imdbclone',
 });
 
 /*const options = {
@@ -34,22 +34,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.set('trust proxy', 1);
 
 /*app.use(session({
-	name: process.env.SESS_NAME,
-	secret: process.env.SESS_SECRET,
-	resave: false,
-	saveUninitialized: false,
-	store: sessionStore,
-	cookie: {
-		maxAge: 1000 * 60 * 60 * 24 * 365,
-		httpOnly: true,
-		secure: process.env.NODE_ENV == 'production' ? true : false,
-		sameSite: 'none'
-	}
+    name: process.env.SESS_NAME,
+    secret: process.env.SESS_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: sessionStore,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365,
+        httpOnly: true,
+        secure: process.env.NODE_ENV == 'production' ? true : false,
+        sameSite: 'none'
+    }
 }));*/
 
 app.get('/api/getDetails', (req, res) => {
     //const sqlSelect = "select m.name, m.year, m.plot, m.poster, a.name, a.gender, a.dob, a.bio from movies m left join movie_actor ma on m.movie_id = ma.movie_id right join actors a on a.actor_id = ma.actor_id";
-    
+
     const sqlSelect = "select * from movies";
     db.query(sqlSelect, (err, result) => {
         console.log(result);
@@ -88,14 +88,14 @@ app.get('/api/getActors', (req, res) => {
     const sqlSelect = "select actor_id, name from actors";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
-    }); 
+    });
 });
 
 app.get('/api/getProducer', (req, res) => {
     const sqlSelect = "select producer_id, name from producers";
     db.query(sqlSelect, (err, result) => {
         res.send(result);
-    }); 
+    });
 });
 
 app.post('/api/addactor', (req, res) => {
@@ -132,10 +132,10 @@ app.post('/api/insertmovie', (req, res) => {
     const name = req.body.newmname;
     const year = req.body.newmyear;
     const plot = req.body.newmplot;
-    
+
     const sqlInsert = "insert into movies(name, year, plot) values (?, ?, ?)";
     db.query(sqlInsert, [name, year, plot], (err, result) => {
-       res.send({message: "Success"}); 
+        res.send({ message: "Success" });
     });
 });
 
@@ -154,7 +154,7 @@ app.post('/api/actmov', (req, res) => {
     const actor_id = req.body.actor_id;
     const sqlInsert = "insert into movie_actor values (?, ?)";
     db.query(sqlInsert, [movie_id, actor_id], (err, result) => {
-        res.send({message: "Inserted"});
+        res.send({ message: "Inserted" });
     });
 });
 
@@ -164,10 +164,10 @@ app.post('/api/prodmov', (req, res) => {
 
     const sqlInsert = "insert into movie_producer values (?, ?)";
     db.query(sqlInsert, [movie_id, producer_id], (err, result) => {
-        res.send({message: "Inserted"});
+        res.send({ message: "Inserted" });
     });
 });
 
 app.listen(port, () => {
-	console.log('running on port ' + port);
+    console.log('running on port ' + port);
 });
