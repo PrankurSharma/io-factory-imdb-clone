@@ -21,29 +21,29 @@ function FetchMovies() {
     }, []);
 
     function fetchCastDetails(movieid) {
-            Axios.post('http://localhost:3001/api/getDetailsActors', 
+        Axios.post('http://localhost:3001/api/getDetailsActors',
             {
                 movieid: movieid
             }).then((response) => {
-            set_actors(response.data);
-        }).catch((err) => {
-            console.log(err);
-        });
-        Axios.post('http://localhost:3001/api/getDetailsProducer', 
-        {
-            movieid: movieid
-        }).then((response) => {
-            set_producer(response.data[0]);
-        }).catch((err) => {
-            console.log(err);
-        });
+                set_actors(response.data);
+            }).catch((err) => {
+                console.log(err);
+            });
+        Axios.post('http://localhost:3001/api/getDetailsProducer',
+            {
+                movieid: movieid
+            }).then((response) => {
+                set_producer(response.data[0]);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     function updateDetails(movieid) {
-        if(newname === "" || newyear === "" || newplot === ""){
+        if (newname === "" || newyear === "" || newplot === "") {
             alert("Please fill all the fields in order to proceed.");
         }
-        else{
+        else {
             Axios.put('http://localhost:3001/api/updateDetails', {
                 movieid: movieid,
                 newname: newname,
@@ -51,7 +51,7 @@ function FetchMovies() {
                 newplot: newplot
             }).then((response) => {
                 set_results(results.map((val) => {
-                    return val.movie_id === movieid ? {movie_id: movieid, name: newname, year: newyear, plot: newplot} : val; 
+                    return val.movie_id === movieid ? { movie_id: movieid, name: newname, year: newyear, plot: newplot } : val;
                 }));
                 alert("Movie details updated successfully.");
                 set_newname("");
@@ -70,61 +70,61 @@ function FetchMovies() {
                 set_add(true);
             }}> Add a new movie </button>
             {!add ? (<><h1> Movie List </h1>
-            <div className="fetchmovies">
-                {results.map((ele) => {
-                    return (
-                        <div className="fetchres" key={ele.movie_id}>
-                            <h1> Movie Details </h1>
-                            <h2> {ele.name} </h2>
-                            <h2> {ele.year} </h2>
-                            <h2> {ele.plot} </h2>
-                            {!show && <button onClick={() => {
-                        set_show((showit) => !showit);
-                        fetchCastDetails(ele.movie_id);
-                    }}> Show Cast Details </button>}
-                    {show && (
-                        <>
-                            <h2> Actors </h2>
-                            <div className="actors">
-                                {actors.map((element) => {
-                                    return (
-                                        <div className="subactor" key={element.name}>
-                                            <h3> {element.name} </h3>
-                                            <h3> {element.gender} </h3>
-                                            <h3> {element.dob} </h3>
-                                            <h3> {element.bio} </h3>
+                <div className="fetchmovies">
+                    {results.map((ele) => {
+                        return (
+                            <div className="fetchres" key={ele.movie_id}>
+                                <h1> Movie Details </h1>
+                                <h2> {ele.name} </h2>
+                                <h2> {ele.year} </h2>
+                                <h2> {ele.plot} </h2>
+                                {!show && <button onClick={() => {
+                                    set_show((showit) => !showit);
+                                    fetchCastDetails(ele.movie_id);
+                                }}> Show Cast Details </button>}
+                                {show && (
+                                    <>
+                                        <h2> Actors </h2>
+                                        <div className="actors">
+                                            {actors.map((element) => {
+                                                return (
+                                                    <div className="subactor" key={element.name}>
+                                                        <h3> {element.name} </h3>
+                                                        <h3> {element.gender} </h3>
+                                                        <h3> {element.dob} </h3>
+                                                        <h3> {element.bio} </h3>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
-                                    );
-                                })}
+                                        <h2> Producer Details </h2>
+                                        <div className="producer">
+                                            <h3> {producer.name} </h3>
+                                            <h3> {producer.gender} </h3>
+                                            <h3> {producer.dob} </h3>
+                                            <h3> {producer.bio} </h3>
+                                        </div>
+                                    </>
+                                )}
+                                <h2> Edit Movie Details </h2>
+                                <div className="editdetails">
+                                    <input placeholder="Name of the movie" value={newname} onChange={(e) => {
+                                        set_newname(e.target.value);
+                                    }} />
+                                    <input placeholder="Year" value={newyear} onChange={(e) => {
+                                        set_newyear(e.target.value);
+                                    }} />
+                                    <input placeholder="Plot" value={newplot} onChange={(e) => {
+                                        set_newplot(e.target.value);
+                                    }} />
+                                    <button onClick={() => {
+                                        updateDetails(ele.movie_id);
+                                    }}> Edit </button>
+                                </div>
                             </div>
-                            <h2> Producer Details </h2>
-                            <div className="producer">
-                                <h3> {producer.name} </h3>
-                                <h3> {producer.gender} </h3>
-                                <h3> {producer.dob} </h3>
-                                <h3> {producer.bio} </h3>
-                            </div>
-                        </>
-                    )}
-                    <h2> Edit Movie Details </h2>
-                            <div className="editdetails">
-                                <input placeholder="Name of the movie" value={newname} onChange={(e) => {
-                                    set_newname(e.target.value);
-                                }}/>
-                                <input placeholder="Year" value={newyear} onChange={(e) => {
-                                    set_newyear(e.target.value);
-                                }}/>
-                                <input placeholder="Plot" value={newplot} onChange={(e) => {
-                                    set_newplot(e.target.value);
-                                }}/>
-                                <button onClick={() => {
-                                    updateDetails(ele.movie_id);
-                                }}> Edit </button>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div></>) : <AddMovie fetch={add} />}
+                        );
+                    })}
+                </div></>) : <AddMovie fetch={add} />}
         </div>
     );
 }
