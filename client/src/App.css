@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+.fetchmovies {
+  display: flex;
+  width: 90%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.fetchres {
+  border: 2px solid black;
+  width: 50%;
+}
+
+.actors {
+  display: flex;
+  width: 98%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.producer {
+  display: flex;
+}
+
+.producer h3 {
+  margin-right: 5px;
+}
+
+.subactor {
+  border: 2px solid black;
+  margin-left: 5px;
+}
