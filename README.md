@@ -99,19 +99,18 @@ Table 5: movie_producer --> Junction table of movies and producers(One-to-One an
 
 Query:
 
-CREATE TABLE `producers` (
-  `producer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `gender` varchar(15) NOT NULL,
-  `dob` date NOT NULL,
-  `bio` varchar(200) NOT NULL,
-  PRIMARY KEY (`producer_id`)
+CREATE TABLE `movie_producer` (
+  `movie_id` int(11) NOT NULL,
+  `producer_id` int(11) NOT NULL,
+  PRIMARY KEY (`movie_id`),
+  KEY `producer_id` (`producer_id`),
+  CONSTRAINT `producer_id` FOREIGN KEY (`producer_id`) REFERENCES `producers` (`producer_id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 1. One movie can have one producer.
 2. One producer can produce multiple movies.
 
 producer_id: foreign key that references producers table with the column producer_id
-movie_id has been set as primary key such that a movie comes for a single time in the database and producer can have similar values more than once.
+movie_id has been set as primary key such that a movie comes for a single time in the database and producer can have similar values more than once. Again normalization takes place.
 
 movie_id(Primary Key)(INT)  |  producer_id(INT)
