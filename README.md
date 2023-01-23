@@ -36,7 +36,7 @@ CREATE TABLE `movies` (
   `plot` varchar(200) NOT NULL,
   `poster` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`movie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
 
 movie_id(Primary Key, Auto increment)(INT)  |  name(VARCHAR(45))  | year(INT)  | plot(VARCHAR(200))  | poster(VARCHAR(200))
 
@@ -51,7 +51,7 @@ CREATE TABLE `actors` (
   `dob` date NOT NULL,
   `bio` varchar(200) NOT NULL,
   PRIMARY KEY (`actor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
 
 actor_id(Primary Key, Auto increment)(INT)  |  name(VARCHAR(45))  |  gender(VARCHAR(15))  |  dob(DATE)  |  bio(VARCHAR(200))
 
@@ -66,7 +66,7 @@ CREATE TABLE `producers` (
   `dob` date NOT NULL,
   `bio` varchar(200) NOT NULL,
   PRIMARY KEY (`producer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
 
 producer_id(Primary Key, Auto increment)(INT)  |  name(VARCHAR(45))  |  gender(VARCHAR(15))  |  dob(DATE)  |  bio(VARCHAR(200))
 
@@ -82,7 +82,7 @@ CREATE TABLE `movie_actor` (
   KEY `actor_id_idx` (`actor_id`),
   CONSTRAINT `actor_id` FOREIGN KEY (`actor_id`) REFERENCES `actors` (`actor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `movie_id` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`movie_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
 
 1. Movies can have multiple actors
 2. Actors can act in multiple movies
@@ -104,7 +104,7 @@ CREATE TABLE `producers` (
   `dob` date NOT NULL,
   `bio` varchar(200) NOT NULL,
   PRIMARY KEY (`producer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
 
 1. One movie can have one producer.
 2. One producer can produce multiple movies.
